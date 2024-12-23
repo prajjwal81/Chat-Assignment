@@ -12,9 +12,9 @@ export default function Main() {
       const res = await getItem('user');
       console.log(res);
       if (res) {
-        // setLoading(true);
+        setLoading(true);
       } else {
-        // setLoading(false);
+        setLoading(false);
       }
     };
     user();

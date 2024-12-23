@@ -3,6 +3,7 @@ import {useNavigation} from '@react-navigation/native';
 import Home from '../Screens/Chat/Chat';
 import Profile from '../Screens/Profile/Profile';
 import ChatStack from '../TabNavigators/Chat.Navigation';
+import ProfileStack from '../TabNavigators/Profile.Navigation';
 
 const Tab = createBottomTabNavigator();
 
@@ -21,7 +22,7 @@ const BottomStack = () => {
         },
       }}>
       <Tab.Screen name="Home" component={ChatStack} />
-      <Tab.Screen name="Profile" component={Profile} />
+      <Tab.Screen name="ProfileStack" component={ProfileStack} />
     </Tab.Navigator>
   );
 };

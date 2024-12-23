@@ -1,8 +1,10 @@
 import {Alert, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React from 'react';
 import {clearItem} from '../../Utils/storage';
+import {useNavigation} from '@react-navigation/native';
 
 export default function Profile() {
+  const navigation = useNavigation();
   const logoutHandler = () => {
     Alert.alert(
       'Confirmation', // Alert title
@@ -17,6 +19,7 @@ export default function Profile() {
           text: 'OK',
           onPress: () => {
             clearItem();
+            navigation.navigate('Main');
           },
         },
       ],

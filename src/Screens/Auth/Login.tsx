@@ -27,32 +27,28 @@ const Login = () => {
       return;
     }
 
-    const formattedPhoneNumber = `+91${phoneNumber}`; // Adjust for your country
+    const formattedPhoneNumber = `+91${phoneNumber}`;
 
     try {
-      setLoading(true); // Start loading
-      console.log('Sending code to:', formattedPhoneNumber); // Log phone number for debugging
+      setLoading(true);
+      console.log('Sending code to:', formattedPhoneNumber);
 
-      // Firebase phone authentication
       const confirmation = await auth().signInWithPhoneNumber(
         formattedPhoneNumber,
       );
 
-      // Log the confirmation object for debugging
       console.log('Firebase confirmation object:', confirmation);
 
       if (confirmation && confirmation.confirm) {
         setConfirmResult(confirmation);
-        setLoading(false); // End loading
-        // Navigate to OTP screen with confirmation result
+        setLoading(false);
         navigation.navigate('Otp', {confirmResult: confirmation, phoneNumber});
       } else {
         throw new Error('Invalid confirmation object');
       }
     } catch (error) {
-      console.error('Error sending verification code:', error); // Log error details
+      console.error('Error sending verification code:', error);
 
-      // Check if error has specific code and display appropriate message
       if (error.code) {
         switch (error.code) {
           case 'auth/invalid-phone-number':
@@ -74,9 +70,12 @@ const Login = () => {
         Alert.alert('Error', 'An unexpected error occurred.');
       }
     } finally {
-      // This will always run whether there's an error or not
       console.log('Finished attempting to send verification code.');
-      setLoading(false); // End loading
+      navigation.navigate('Otp', {
+        confirmResult: confirmation,
+        mobile: phoneNumber,
+      });
+      setLoading(false);
     }
   };
 
@@ -92,8 +91,8 @@ const Login = () => {
         placeholder="Your Mobile"
         style={styles.input}
         placeholderTextColor={'black'}
-        keyboardType="phone-pad" // Restrict to numeric input
-        maxLength={10} // Allow only 10 digits
+        keyboardType="phone-pad"
+        maxLength={10}
       />
 
       <Pressable onPress={handleSendCode} style={styles.btn} disabled={loading}>

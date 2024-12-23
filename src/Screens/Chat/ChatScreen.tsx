@@ -17,7 +17,6 @@ export default function ChatScreen({route}) {
   const [newMessage, setNewMessage] = useState('');
 
   useEffect(() => {
-    // Simulate incoming messages using setInterval
     const interval = setTimeout(() => {
       const incomingMessage = {
         id: Date.now().toString(),
@@ -25,9 +24,9 @@ export default function ChatScreen({route}) {
         sender: 'user',
       };
       setMessages(prevMessages => [...prevMessages, incomingMessage]);
-    }, 5000); // Every 5 seconds
+    }, 5000);
 
-    return () => clearInterval(interval); // Cleanup on unmount
+    return () => clearInterval(interval);
   }, [user.name, newMessage]);
 
   const handleSendMessage = () => {

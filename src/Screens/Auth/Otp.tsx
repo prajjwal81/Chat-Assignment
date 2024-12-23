@@ -25,7 +25,7 @@ const Otp = () => {
   const [otp, setOtp] = useState('');
   const [loading, setLoading] = useState(false);
   const route = useRoute();
-  const {confirmResult, phoneNumber} = route.params; // Getting confirmResult from params
+  const {confirmResult, phoneNumber} = route.params;
   const navigation = useNavigation();
 
   const ref = useBlurOnFulfill({value: otp, cellCount: CELL_COUNT});
@@ -45,7 +45,6 @@ const Otp = () => {
       await confirmResult.confirm(otp);
       setLoading(false);
       Alert.alert('Success', 'Phone number verified successfully!');
-      // You can navigate to the home screen or any next screen here
       addItem(phoneNumber);
       navigation.navigate('BottomStack');
     } catch (error) {
@@ -91,10 +90,7 @@ const Otp = () => {
         )}
       />
 
-      <Pressable
-        onPress={() => {
-          // Handle resend OTP logic
-        }}>
+      <Pressable onPress={() => {}}>
         <Text style={styles.innerText}>
           Didn't receive the code?{' '}
           <Text style={styles.spanStyle}>Resend OTP</Text>

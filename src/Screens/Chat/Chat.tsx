@@ -1,6 +1,7 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {FlatList, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
+import {getItem} from '../../Utils/storage';
 
 const mockUsers = [
   {id: '1', name: 'John Doe', lastMessage: 'Hey, what’s up?'},
@@ -15,6 +16,8 @@ const mockUsers = [
 
 export default function Chat() {
   const navigation = useNavigation();
+
+  useEffect(() => {});
 
   return (
     <View style={styles.container}>
