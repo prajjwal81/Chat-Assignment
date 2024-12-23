@@ -45,7 +45,7 @@ const Login = () => {
         setConfirmResult(confirmation);
         setLoading(false); // End loading
         // Navigate to OTP screen with confirmation result
-        navigation.navigate('Otp', {confirmResult: confirmation});
+        navigation.navigate('Otp', {confirmResult: confirmation, phoneNumber});
       } else {
         throw new Error('Invalid confirmation object');
       }

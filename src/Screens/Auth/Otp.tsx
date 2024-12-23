@@ -9,7 +9,7 @@ import {
   StyleSheet,
   Platform,
 } from 'react-native';
-import {useRoute} from '@react-navigation/native';
+import {useNavigation, useRoute} from '@react-navigation/native';
 import {
   CodeField,
   Cursor,
@@ -17,6 +17,7 @@ import {
   useClearByFocusCell,
 } from 'react-native-confirmation-code-field';
 import auth from '@react-native-firebase/auth';
+import {addItem} from '../../Utils/storage';
 
 const CELL_COUNT = 6;
 
@@ -24,7 +25,8 @@ const Otp = () => {
   const [otp, setOtp] = useState('');
   const [loading, setLoading] = useState(false);
   const route = useRoute();
-  const {confirmResult} = route.params; // Getting confirmResult from params
+  const {confirmResult, phoneNumber} = route.params; // Getting confirmResult from params
+  const navigation = useNavigation();
 
   const ref = useBlurOnFulfill({value: otp, cellCount: CELL_COUNT});
   const [props, getCellOnLayoutHandler] = useClearByFocusCell({
@@ -44,7 +46,8 @@ const Otp = () => {
       setLoading(false);
       Alert.alert('Success', 'Phone number verified successfully!');
       // You can navigate to the home screen or any next screen here
-      // navigation.navigate('Home');
+      addItem(phoneNumber);
+      navigation.navigate('BottomStack');
     } catch (error) {
       setLoading(false);
       console.error(error);
